@@ -10,4 +10,6 @@ const noteSchema = new Schema({
 type Note = InferSchemaType<typeof noteSchema>
 
 //nota: Podemos relacionar o Schema a um Tipo do typescript, e depois a utilização do mesmo no elemento abaixo
-export default model<Note>("Note", noteSchema)
+const noteModel = model<Note>("Note", noteSchema)
+
+export default noteModel

@@ -1,12 +1,14 @@
-import express, { Request, Response, NextFunction } from "express";
-import notesRoutes from "./routes/notes";
+import express, { Request, Response, NextFunction } from "express"
+import notesRoutes from "./routes/notes"
 
-const app = express();
+const app = express()
 
-app.use("/api/notes", notesRoutes);
+app.use(express.json());
+
+app.use("/api/notes", notesRoutes)
 
 app.use((req, res, next) => {
-  next(Error("Endpoint not found"));
+  next(Error("Endpoint not found"))
 });
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
@@ -16,4 +18,4 @@ app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ errorMessage: errorMessage})
 });
 
-export default app;
+export default app

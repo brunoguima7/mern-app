@@ -42,7 +42,7 @@ export const getNote: RequestHandler = async (req, res, next) => {
     }
 }
 
-//por padrão o RequestHandler deve ter a declaracao de 4 tipos, então estarei usando o tipo "unknown" para os que não vou utilizar.
+//por padrão o RequestHandler deve ter a declaracao de 4 tipos, então estarei usando o tipo "unknown" para os que não vou declarar.
 export const createNote: RequestHandler<unknown, unknown, NoteBody, unknown> = async (req, res, next) => {
     const title = req.body.title
     const text = req.body.text
@@ -75,7 +75,7 @@ export const updateNote: RequestHandler<UpdateNoteParams, unknown, NoteBody, unk
         if (!newTitle) {
             throw createHttpError(400, "Note must have a title")
         }
-        
+
         const note = await NoteModel.findById(noteId).exec()
 
         if (!note) {
@@ -106,8 +106,8 @@ export const deleteNote: RequestHandler = async (req, res, next) => {
         if (!note) {
             throw createHttpError(404, "Note not found")
         }
-        
-        //o mesmo que await note.remove(), porém fiz dessa forma para exemplicar um metódo diferente do updateNote.
+
+        //o mesmo que await note.remove(), porém fiz dessa forma para exemplificar um metódo diferente do updateNote.
         await NoteModel.findByIdAndDelete(noteId).exec()
 
         res.sendStatus(204)
